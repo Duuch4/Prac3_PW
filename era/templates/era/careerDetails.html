@@ -1,0 +1,15 @@
+{% extends "era/base.html" %}
+{% block title %}Era - {{ carrera.name }}{% endblock %}
+{% block content %}
+<span vocab="https://schema.org/" typeof="Career">
+<h1>Career <span property="name">{{ carrera.name }}</span> info</h1>
+<ul>
+    <li><a>Name: <span property="name">{{ carrera.name }}</span></a></li>
+    <li><a>Description: <span property="description">{{ carrera.description }}</span></a></li>
+    <li><a>Facultad: <span property="faculty">{{ facultad.name }}</span></a></li>
+</ul>
+{% if user.is_authenticated and user == facultad.user %}
+<a href="{% url 'era:career_edit' carrera.Facultad_idFacultad.id_Facultad carrera.id_carrera %}">Edit</a>
+<a href="{% url 'era:career_delete' carrera.Facultad_idFacultad.id_Facultad carrera.id_carrera %}">Delete</a>
+{% endif %}
+{% endblock %}

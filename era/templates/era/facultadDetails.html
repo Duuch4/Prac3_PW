@@ -1,0 +1,33 @@
+{% extends "era/base.html" %}
+{% block title %}Era - {{ facultad.name }}{% endblock %}
+{% block content %}
+<span vocab="https://schema.org/" typeof="CollegeOrUniversity">
+<h1>Facultad <span property="name">{{ facultad.name }}</span> info</h1>
+<ul>
+    <li><a>Name: <span property="name">{{ facultad.name }}</span></a></li>
+    <li><a>Description: <span property="description">{{ facultad.description }}</span></a></li>
+</ul>
+{% if user.is_authenticated and user == facultad.user %}
+<a href="{% url 'era:facultad_edit' facultad.id_Facultad %}">Edit</a>
+<a href="{% url 'era:facultad_delete' facultad.id_Facultad %}">Delete</a>
+{% endif %}
+<span rel="careers">
+<h1>Careers</h1>
+<ul>
+    {% for career in careerList %}
+        <li rel="career" typeof="Career">
+
+        Name: <a href="{% url 'era:career_details' facultad.id_Facultad career.id_carrera %}" ></a>
+            <span property="name">{{ career.name }}</span>
+        </a>
+
+
+    </li>
+    {% endfor %}
+</ul>
+</span>
+ {% if user.is_authenticated and user == facultad.user %}
+<a href="{% url 'era:create_career' facultad.id_Facultad %}">create</a>
+{% endif %}
+</span>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "era/base.html" %}
+{% block content %}
+<h1>
+    Facultad List
+    {% if user.is_authenticated %}(<a href="{% url 'era:create_facultad' %}">add</a>){% endif %}
+</h1>
+<ul>
+    {% for facultad in facultad_list %}
+        <li><a href="{% url 'era:facultad_details' facultad.id_Facultad %}">
+            {{ facultad.name }}</a></li>
+    {% empty %}<li>Sorry, no facultad registered yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
